@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name">Gestion des voyages</string>
     <string name="kits_list_title">Kits de voyage</string>
     <string name="hint_depart">Départ</string>
     <string name="hint_destination">Destination</string>
