@@ -1,4 +1,4 @@
-package com.example.mvvm_voyages_etu;
+package com.example.mvvm_voyages_etu.ui.main;
 
 import android.os.Bundle;
 
@@ -8,6 +8,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.mvvm_voyages_etu.R;
 
 
 public class MainActivity extends AppCompatActivity {
