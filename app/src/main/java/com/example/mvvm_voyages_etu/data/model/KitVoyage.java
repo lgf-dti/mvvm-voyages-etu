@@ -46,5 +46,9 @@ public class KitVoyage {
     public String toString() {
         return depart + " \u2192 " + destination;
     }
+
+    public String getNbOptions() {
+        return options.size() + " options";
+    }
 }
 
