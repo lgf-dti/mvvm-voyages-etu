@@ -1,8 +1,13 @@
 package com.example.mvvm_voyages_etu.data.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class OptionVoyage {
+    @SerializedName("_id")
+    private String id;
     private final String nom;
     private final double prix;
+    @SerializedName("tarifReduit")
     private final boolean tarifReduit;
 
     public static final double COEF_TARIF_REDUIT = 0.8;

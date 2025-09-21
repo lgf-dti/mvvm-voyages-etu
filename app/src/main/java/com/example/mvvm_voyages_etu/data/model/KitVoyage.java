@@ -1,15 +1,19 @@
 package com.example.mvvm_voyages_etu.data.model;
 
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class KitVoyage {
 
-    private final String id;
+    @SerializedName("_id")
+    private String id;
     private final String depart;
     private final String destination;
+    @SerializedName("options")
     private final List<OptionVoyage> options = new ArrayList<>();
 
     /** Génère automatiquement un id unique */
