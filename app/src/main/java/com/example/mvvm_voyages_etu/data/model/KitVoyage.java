@@ -19,6 +19,13 @@ public class KitVoyage {
         this.destination = destination;
     }
 
+
+    public KitVoyage(String id, String depart, String destination) {
+        this.id = id;
+        this.depart = depart;
+        this.destination = destination;
+    }
+
     // ---- Getters ----
     public String getId() { return id; }
     public String getDepart() { return depart; }
