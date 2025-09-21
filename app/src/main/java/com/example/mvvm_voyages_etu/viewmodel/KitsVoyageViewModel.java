@@ -1,16 +1,12 @@
 package com.example.mvvm_voyages_etu.viewmodel;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-
 import com.example.mvvm_voyages_etu.data.model.KitVoyage;
-import com.example.mvvm_voyages_etu.data.model.OptionVoyage;
 import com.example.mvvm_voyages_etu.data.repository.KitsVoyageRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,14 +18,13 @@ public class KitsVoyageViewModel extends ViewModel {
 
     private final KitsVoyageRepository repo;
 
-    // L'UI observe ceci
-    private final MutableLiveData<List<KitVoyage>> kits = new MutableLiveData<>(new ArrayList<>());
+    // On expose directement le LiveData du repository
+    private final LiveData<List<KitVoyage>> kits;
 
     @Inject
     public KitsVoyageViewModel(KitsVoyageRepository repo) {
         this.repo = repo;
-        // Chargement initial
-        kits.setValue(repo.getAll());
+        this.kits = repo.getAll(); // pas de setValue ici
     }
 
     // --- Exposition ---
@@ -37,7 +32,7 @@ public class KitsVoyageViewModel extends ViewModel {
         return kits;
     }
 
-    /** LiveData du kit demandé, dérivée de la liste observable */
+    /** LiveData du kit demandé, dérivé de la liste observable */
     public LiveData<KitVoyage> getKitById(String id) {
         return Transformations.map(kits, list -> {
             if (list == null || id == null) return null;
@@ -48,19 +43,9 @@ public class KitsVoyageViewModel extends ViewModel {
         });
     }
 
-    // --- Actions ---
-    /** Ajoute un kit puis notifie l'UI en réinjectant la liste à jour */
-    public void add(String depart, String destination) {
-        repo.add(new KitVoyage(depart, destination));
-        kits.setValue(repo.getAll());
+    /** Permettre à l’UI de forcer un rechargement */
+    public void refresh() {
+        repo.refreshAll();
     }
 
-    /** Ajoute une option à un kit, retourne true si succès, et notifie l'UI */
-    public boolean addOptionToKitId(String kitId, String nom, double prix) {
-        boolean ok = repo.addOptionToKitId(kitId, new OptionVoyage(nom, prix));
-        if (ok) {
-            kits.setValue(repo.getAll());
-        }
-        return ok;
-    }
 }
