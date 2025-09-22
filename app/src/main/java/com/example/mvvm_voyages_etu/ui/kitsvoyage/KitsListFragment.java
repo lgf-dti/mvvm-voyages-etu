@@ -50,6 +50,7 @@ public class KitsListFragment extends Fragment {
         });
         rv.setAdapter(adapter);
 
+        vm.refresh();
         // Observe la liste des kits
         vm.getKitsVoyage().observe(getViewLifecycleOwner(),
                 list -> adapter.submitList(new ArrayList<>(list)));
@@ -62,8 +63,9 @@ public class KitsListFragment extends Fragment {
             String dest = etDestination.getText().toString().trim();
             if (dep.isEmpty()) { etDepart.setError("Requis"); return; }
             if (dest.isEmpty()) { etDestination.setError("Requis"); return; }
-            vm.add(dep, dest);
+           // vm.add(dep, dest);
             etDepart.setText(""); etDestination.setText("");
+            vm.refresh();
         });
     }
 }

@@ -8,7 +8,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
     private static Retrofit retrofit;
 
-    public static Retrofit get(String baseUrl) {
+    public static final String BASE_URL = "https://smart-headlines-simpsons-afternoon.trycloudflare.com/api/";
+
+    public static Retrofit get() {
         if (retrofit == null) {
             HttpLoggingInterceptor log = new HttpLoggingInterceptor();
             log.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -18,7 +20,7 @@ public class ApiClient {
                     .build();
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl(baseUrl)
+                    .baseUrl(BASE_URL) // 👈 constante
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

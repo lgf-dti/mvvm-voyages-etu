@@ -55,13 +55,13 @@ public class CreateOptionFragment extends Fragment {
                 return;
             }
 
-            boolean ok = vm.addOptionToKitId(kitId, nom, prix);
-            if (ok) {
-                Toast.makeText(requireContext(), "Option ajoutée", Toast.LENGTH_SHORT).show();
-                NavHostFragment.findNavController(this).navigateUp(); // retour au détail
-            } else {
-                Toast.makeText(requireContext(), "Échec de l’ajout", Toast.LENGTH_SHORT).show();
-            }
+//            boolean ok = vm.addOptionToKitId(kitId, nom, prix);
+//            if (ok) {
+//                Toast.makeText(requireContext(), "Option ajoutée", Toast.LENGTH_SHORT).show();
+//                NavHostFragment.findNavController(this).navigateUp(); // retour au détail
+//            } else {
+//                Toast.makeText(requireContext(), "Échec de l’ajout", Toast.LENGTH_SHORT).show();
+//            }
         });
     }
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.mvvm_voyages_etu.data.model.KitVoyage;
 import com.example.mvvm_voyages_etu.data.model.OptionVoyage;
+import com.example.mvvm_voyages_etu.network.ApiClient;
 import com.example.mvvm_voyages_etu.network.api.KitVoyageApi;
 
 import java.util.ArrayList;
@@ -27,9 +28,10 @@ public class KitsVoyageRepository {
     private final MutableLiveData<List<KitVoyage>> kitsLive = new MutableLiveData<>(Collections.emptyList());
 
     @Inject
-    public KitsVoyageRepository(KitVoyageApi kitVoyageApi) {
-        this.kitVoyageApi = kitVoyageApi;
+    public KitsVoyageRepository() {
+        this.kitVoyageApi = ApiClient.get().create(KitVoyageApi.class);
     }
+
 
     /** Expose le LiveData des kits. Déclenche un chargement initial si nécessaire. */
     public LiveData<List<KitVoyage>> getAll() {
