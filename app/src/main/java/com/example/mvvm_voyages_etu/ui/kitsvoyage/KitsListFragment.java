@@ -9,15 +9,18 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mvvm_voyages_etu.R;
+import com.example.mvvm_voyages_etu.data.model.KitVoyage;
 import com.example.mvvm_voyages_etu.viewmodel.KitsVoyageViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -51,8 +54,12 @@ public class KitsListFragment extends Fragment {
         rv.setAdapter(adapter);
 
         // Observe la liste des kits
-        vm.getKitsVoyage().observe(getViewLifecycleOwner(),
-                list -> adapter.submitList(new ArrayList<>(list)));
+        vm.getKitsVoyage().observe(getViewLifecycleOwner(), new Observer<List<KitVoyage>>() {
+                    @Override
+                    public void onChanged(List<KitVoyage> kitVoyages) {
+                        adapter.submitList(new ArrayList<>(kitVoyages));
+                    }
+                });
 
         // Création d’un kit via le formulaire
         EditText etDepart = v.findViewById(R.id.etDepart);
